@@ -39,7 +39,7 @@ const generateAndSaveQR = async (cedula_rif, nombre) => {
                 };
             } else {
                 // Si no existe, generar uno nuevo y actualizar la base de datos
-                const qrUrl = `http://iniciar-compra.app.polizaqui.com/${cedula_rif}/${encodeURIComponent(nombre)}`; // Usar encodeURIComponent para asegurar caracteres válidos en la URL
+                const qrUrl = `https://iniciar-compra.app.polizaqui.com/${cedula_rif}/${encodeURIComponent(nombre)}`; // Usar encodeURIComponent para asegurar caracteres válidos en la URL
                 const qrCode = await QRCode.toDataURL(qrUrl);
                 const sqlUpdateQR = 'UPDATE aliados SET codigo_qr = ?, url_qr = ?, estado_qr = ? WHERE cedula_rif = ? AND nombre = ?';
                 await connection.execute(sqlUpdateQR, [qrCode, qrUrl, 'Activo', cedula_rif, nombre]);
